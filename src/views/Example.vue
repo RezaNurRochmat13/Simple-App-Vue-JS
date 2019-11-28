@@ -36,8 +36,30 @@
               </tr>
           </tbody>
         </table>
+
+        <!-- Data seko api -->
+        <h1>Data dari API</h1>
+        {{ posts }}
       </div>
 </template>
+
 <script>
-// write your code here
+import axios from 'axios'
+
+export default {
+  name: 'example-pages',
+  data: function() {
+    return {
+      posts: []
+    }
+  },
+  mounted() {
+    const url = 'https://jsonplaceholder.typicode.com/posts'
+    axios.get(url).then(response => {
+      this.posts = response.data
+    }).catch(err => {
+      return err
+    })
+  }
+}
 </script>
